@@ -22,7 +22,20 @@ function App() {
     }
   }
 
-  const list=[1,2,3]
+  const[list,setList]=useState([1,2,3])
+  const[num_val,setNumVal]=useState()
+
+  function changeVal(e){
+    (!isNaN(e.target.value))?setNumVal(Number(e.target.value)):alert("Enter a number")
+  }
+
+  function addfn(){
+    
+    let max_val=Math.max(...list)+num_val
+    setList([...list,max_val])
+    setNumVal("")
+  }
+
 
   return (
     <>
@@ -37,10 +50,11 @@ function App() {
           ))
         )
       }
+      <input type="text" value={num_val} onChange={changeVal}/><button onClick={addfn}>Add</button>
       {
         list.map(num=>{
           return(
-            <ListDisplay value={num}/>
+            <ListDisplay value={num} />
           )
         })
       }
